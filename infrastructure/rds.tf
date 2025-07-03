@@ -6,8 +6,8 @@ resource "aws_db_instance" "mysql" {
   engine_version          = "8.0"
   instance_class          = "db.t4g.micro"
   db_name                 = "liquibaseapp"
-  username                = "admin"
-  password                = "admin123"
+  username                = "username"
+  password                = "password"
   publicly_accessible     = true
   skip_final_snapshot     = true
   deletion_protection     = false
