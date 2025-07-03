@@ -1,0 +1,43 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3
+      author: sandeep
+      changes:
+        - insert:
+            tableName: articles
+            columns:
+              - column: { name: title, value: "Introduction to PostgreSQL" }
+              - column: { name: content, value: "PostgreSQL is an open source RDBMS..." }
+              - column: { name: author, value: "Alice" }
+              - column: { name: published_at, valueDate: "2024-10-01T10:00:00" }
+        - insert:
+            tableName: articles
+            columns:
+              - column: { name: title, value: "Getting Started with SQL" }
+              - column: { name: content, value: "SQL stands for Structured Query Language..." }
+              - column: { name: author, value: "Bob" }
+              - column: { name: published_at, valueDate: "2024-11-01T12:00:00" }
+
+        - insert:
+            tableName: comments
+            columns:
+              - column: { name: article_id, valueNumeric: 1 }
+              - column: { name: commenter, value: "Dave" }
+              - column: { name: comment, value: "Great introduction!" }
+              - column: { name: commented_at, valueDate: "2024-10-02T09:00:00" }
+
+        - insert:
+            tableName: comments
+            columns:
+              - column: { name: article_id, valueNumeric: 1 }
+              - column: { name: commenter, value: "Eve" }
+              - column: { name: comment, value: "Very helpful, thanks!" }
+              - column: { name: commented_at, valueDate: "2024-10-03T14:30:00" }
+
+        - insert:
+            tableName: comments
+            columns:
+              - column: { name: article_id, valueNumeric: 2 }
+              - column: { name: commenter, value: "Frank" }
+              - column: { name: comment, value: "I finally understand joins!" }
+              - column: { name: commented_at, valueDate: "2024-11-02T11:00:00" }

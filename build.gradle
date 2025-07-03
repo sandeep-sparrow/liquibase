@@ -1,0 +1,56 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.3.13'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id 'org.liquibase.gradle' version '2.2.0'
+}
+
+group = 'org.microarch.blog.ws'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    compileOnly 'org.projectlombok:lombok:1.18.32'
+    annotationProcessor 'org.projectlombok:lombok:1.18.32'
+    testCompileOnly 'org.projectlombok:lombok:1.18.32'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.32'
+    liquibaseRuntime 'org.liquibase:liquibase-core:4.27.0'
+    implementation 'org.liquibase:liquibase-core'
+    implementation 'mysql:mysql-connector-java:8.0.33'
+    liquibaseRuntime 'mysql:mysql-connector-java:8.0.33'
+    liquibaseRuntime 'org.postgresql:postgresql:42.7.7'
+    liquibaseRuntime 'info.picocli:picocli:4.7.5'
+
+    runtimeOnly 'org.postgresql:postgresql'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+liquibase {
+    activities {
+        main {
+            changeLogFile 'db/changelog/db.changelog-master.yaml'
+            url 'jdbc:mysql://<your-rds-endpoint>/liquibaseapp'
+            username 'username'
+            password 'password'
+            driver 'com.mysql.cj.jdbc.Driver'
+            searchPath 'src/main/resources'
+        }
+    }
+    runList = 'main'
+}
+
